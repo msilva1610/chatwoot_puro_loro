@@ -267,7 +267,6 @@ export default {
       </div>
       <div class="flex items-center w-full mt-0.5 gap-2">
         <woot-button
-          v-if="isAdmin"
           v-tooltip="$t('CONTACT_PANEL.NEW_MESSAGE')"
           :title="$t('CONTACT_PANEL.NEW_MESSAGE')"
           icon="chat"
@@ -275,7 +274,6 @@ export default {
           @click="toggleConversationModal"
         />
         <woot-button
-          v-if="isAdmin"
           v-tooltip="$t('EDIT_CONTACT.BUTTON_LABEL')"
           :title="$t('EDIT_CONTACT.BUTTON_LABEL')"
           icon="edit"
@@ -284,7 +282,6 @@ export default {
           @click="toggleEditModal"
         />
         <woot-button
-          v-if="isAdmin"
           v-tooltip="$t('CONTACT_PANEL.MERGE_CONTACT')"
           :title="$t('CONTACT_PANEL.MERGE_CONTACT')"
           icon="merge"
