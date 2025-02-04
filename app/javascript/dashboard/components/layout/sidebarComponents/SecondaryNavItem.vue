@@ -47,10 +47,6 @@ export default {
       return !!this.menuItem.children;
     },
     isMenuItemVisible() {
-      if (this.menuItem.isHidden) {
-        return false;
-      }
-      
       if (this.menuItem.globalConfigFlag) {
         // this checks for the `csmlEditorHost` flag in the global config
         // if this is present, we toggle the CSML editor menu item
@@ -192,8 +188,7 @@ export default {
 </script>
 
 <template>
-  <!-- <li v-if="isMenuItemVisible && menuItem.label !== 'MENTIONED_CONVERSATIONS'" class="mt-1"> -->
-  <li v-if="isMenuItemVisible && (menuItem.label !== 'MENTIONED_CONVERSATIONS' && menuItem.label !== 'UNATTENDED_CONVERSATIONS')" class="mt-1">
+  <li v-show="isMenuItemVisible" class="mt-1">
     <div v-if="hasSubMenu" class="flex justify-between">
       <span
         class="px-2 pt-1 my-2 text-sm font-semibold text-slate-700 dark:text-slate-200"
