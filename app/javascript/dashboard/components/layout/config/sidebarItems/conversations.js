@@ -29,6 +29,7 @@ const conversations = accountId => ({
       toState: frontendURL(`accounts/${accountId}/dashboard`),
       toolTip: 'Conversation from all subscribed inboxes',
       toStateName: 'home',
+      // isHidden: true
     },
     {
       icon: 'mention',
@@ -36,6 +37,8 @@ const conversations = accountId => ({
       key: 'conversation_mentions',
       toState: frontendURL(`accounts/${accountId}/mentions/conversations`),
       toStateName: 'conversation_mentions',
+      isHidden: true
+
     },
     {
       icon: 'mail-unread',

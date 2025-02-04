@@ -27,6 +27,12 @@ export default {
       isFeatureEnabledonAccount: 'accounts/isFeatureEnabledonAccount',
       accountId: 'getCurrentAccountId',
     }),
+    showMuteButton() {
+      return false; // Set to false to completely hide the mute button
+    },
+    showSendTranscript() {
+      return false; // Set to false to completely hide the send transcript button
+    },
     currentContact() {
       return this.$store.getters['contacts/getContact'](
         this.currentChat.meta.sender.id
@@ -91,7 +97,7 @@ export default {
 <template>
   <div class="relative flex items-center gap-2 actions--container">
     <woot-button
-    v-if="isWavoipFeatureEnabled"
+      v-if="isWavoipFeatureEnabled"
       v-tooltip="$t('WEBPHONE.CALL')"
       variant="clear"
       color-scheme="secondary"
@@ -100,7 +106,7 @@ export default {
       @click="startCall"
     />
     <woot-button
-      v-if="!currentChat.muted"
+      v-if="showMuteButton && !currentChat.muted"
       v-tooltip="$t('CONTACT_PANEL.MUTE_CONTACT')"
       variant="clear"
       color-scheme="secondary"
@@ -108,7 +114,7 @@ export default {
       @click="mute"
     />
     <woot-button
-      v-else
+      v-if="showMuteButton && currentChat.muted"
       v-tooltip.left="$t('CONTACT_PANEL.UNMUTE_CONTACT')"
       variant="clear"
       color-scheme="secondary"
@@ -116,6 +122,7 @@ export default {
       @click="unmute"
     />
     <woot-button
+      v-if="showSendTranscript"
       v-tooltip="$t('CONTACT_PANEL.SEND_TRANSCRIPT')"
       variant="clear"
       color-scheme="secondary"

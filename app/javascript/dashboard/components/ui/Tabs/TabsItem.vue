@@ -1,4 +1,5 @@
 <script>
+import { useAdmin } from 'dashboard/composables/useAdmin';
 export default {
   name: 'WootTabsItem',
   props: {
@@ -23,12 +24,20 @@ export default {
       default: true,
     },
   },
-
+  setup() {
+    const { isAdmin } = useAdmin();
+    return {
+      isAdmin,
+    };
+  },
   computed: {
     active() {
       return this.index === this.$parent.index;
     },
-
+    shouldShowTab() {
+      // return this.name !== 'All' || this.isAdmin;
+      return this.isAdmin;
+    },
     getItemCount() {
       return this.count;
     },
@@ -47,6 +56,7 @@ export default {
 
 <template>
   <li
+    v-if="shouldShowTab"
     class="tabs-title"
     :class="{
       'is-active': active,

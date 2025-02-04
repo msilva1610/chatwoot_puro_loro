@@ -1,6 +1,8 @@
 <script>
 import { useKeyboardEvents } from 'dashboard/composables/useKeyboardEvents';
 import { REPLY_EDITOR_MODES, CHAR_LENGTH_WARNING } from './constants';
+import { useAdmin } from 'dashboard/composables/useAdmin';
+
 export default {
   name: 'ReplyTopPanel',
   props: {
@@ -22,6 +24,7 @@ export default {
     },
   },
   setup(props, { emit }) {
+    const { isAdmin } = useAdmin();
     const setReplyMode = mode => {
       emit('setReplyMode', mode);
     };
@@ -46,9 +49,13 @@ export default {
     return {
       handleReplyClick,
       handleNoteClick,
+      isAdmin,
     };
   },
   computed: {
+    showPrivateNote() {
+      return this.isAdmin;
+    },
     replyButtonClass() {
       return {
         'is-active': this.mode === REPLY_EDITOR_MODES.REPLY,
@@ -84,6 +91,7 @@ export default {
       </woot-button>
 
       <woot-button
+        v-if="isAdmin"
         class="button--note"
         variant="clear"
         color-scheme="warning"
