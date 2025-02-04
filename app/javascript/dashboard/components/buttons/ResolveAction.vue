@@ -76,6 +76,11 @@ const getConversationParams = () => {
   };
 };
 
+const openSnoozeModal = () => {
+  const ninja = document.querySelector('ninja-keys');
+  ninja.open({ parent: 'snooze_conversation' });
+};
+
 const toggleStatus = (status, snoozedUntil) => {
   closeDropdown();
   isLoading.value = true;
@@ -181,9 +186,19 @@ useEmitter(CMD_RESOLVE_CONVERSATION, onCmdResolveConversation);
       v-on-clickaway="closeDropdown"
       class="dropdown-pane dropdown-pane--open left-auto top-[2.625rem] mt-0.5 right-0 max-w-[12.5rem] min-w-[9.75rem]"
     >
-      <!-- Mau removeu em 29/01/2025 -->
-      <!-- <WootDropdownMenu class="mb-0">
-        <WootDropdownItem v-if="isOpen">
+      <WootDropdownMenu class="mb-0">
+        <WootDropdownItem v-if="!isPending">
+          <woot-button
+            variant="clear"
+            color-scheme="secondary"
+            size="small"
+            icon="snooze"
+            @click="() => openSnoozeModal()"
+          >
+            {{ t('CONVERSATION.RESOLVE_DROPDOWN.SNOOZE_UNTIL') }}
+          </woot-button>
+        </WootDropdownItem>
+        <WootDropdownItem v-if="!isPending">
           <woot-button
             variant="clear"
             color-scheme="secondary"
@@ -194,7 +209,7 @@ useEmitter(CMD_RESOLVE_CONVERSATION, onCmdResolveConversation);
             {{ t('CONVERSATION.RESOLVE_DROPDOWN.MARK_PENDING') }}
           </woot-button>
         </WootDropdownItem>
-      </WootDropdownMenu> -->
+      </WootDropdownMenu>
     </div>
   </div>
 </template>
