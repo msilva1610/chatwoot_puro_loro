@@ -32,9 +32,6 @@ export default {
     };
   },
   computed: {
-    showParticipants() {
-    return false; // Sempre oculto
-    },    
     ...mapGetters({
       watchersUiFlas: 'conversationWatchers/getUIFlags',
       currentUser: 'getCurrentUser',
@@ -156,7 +153,7 @@ export default {
 </script>
 
 <template>
-  <div v-if="showParticipants" class="relative bg-white dark:bg-slate-900">
+  <div class="relative bg-white dark:bg-slate-900">
     <div class="flex justify-between">
       <div class="flex justify-between w-full mb-1">
         <div>
