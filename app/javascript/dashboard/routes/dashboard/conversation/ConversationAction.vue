@@ -9,8 +9,6 @@ import ConversationLabels from './labels/LabelBox.vue';
 import { CONVERSATION_PRIORITY } from '../../../../shared/constants/messages';
 import { CONVERSATION_EVENTS } from '../../../helper/AnalyticsHelper/events';
 
-import { useAdmin } from 'dashboard/composables/useAdmin';
-
 export default {
   components: {
     ContactDetailsItem,
@@ -24,11 +22,9 @@ export default {
     },
   },
   setup() {
-    const { isAdmin } = useAdmin();
     const { agentsList } = useAgentsList();
     return {
       agentsList,
-      isAdmin
     };
   },
   data() {
@@ -209,10 +205,7 @@ export default {
 
 <template>
   <div class="bg-white dark:bg-slate-900">
-    <!-- Componente responável pelo assign to agent -->
-    <!-- <div class="multiselect-wrap--small" v-if="false"> -->
-    <div class="multiselect-wrap--small" v-if="isAdmin">
-
+    <div class="multiselect-wrap--small">
       <ContactDetailsItem
         compact
         :title="$t('CONVERSATION_SIDEBAR.ASSIGNEE_LABEL')"
@@ -243,9 +236,7 @@ export default {
         @click="onClickAssignAgent"
       />
     </div>
-    <!-- componente resposável pelo assign to team -->
-    <!-- <div class="multiselect-wrap--small" v-if="false"> -->
-    <div class="multiselect-wrap--small" v-if="isAdmin">
+    <div class="multiselect-wrap--small">
       <ContactDetailsItem
         compact
         :title="$t('CONVERSATION_SIDEBAR.TEAM_LABEL')"
@@ -264,8 +255,7 @@ export default {
         @click="onClickAssignTeam"
       />
     </div>
-    <!-- componente resposável por set priority -->
-    <div class="multiselect-wrap--small" v-if="isAdmin">
+    <div class="multiselect-wrap--small">
       <ContactDetailsItem compact :title="$t('CONVERSATION.PRIORITY.TITLE')" />
       <MultiselectDropdown
         :options="priorityOptions"
